@@ -1,0 +1,7 @@
+fastapi
+websockets
+uvicorn
+python-dotenv
+supabase
+streamlit
+requests
