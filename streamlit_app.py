@@ -6,7 +6,7 @@ API_URL = "http://localhost:8000"
 
 st.set_page_config(page_title="Group Chat & Scheduler", layout="centered")
 
-st.title("💬 Multi-User Chat & 🗓️ Meeting Scheduler")
+st.title("Multi-User Chat & Meeting Scheduler")
 
 # Tabs
 tab1, tab2 = st.tabs(["📨 Chat", "📅 Schedule Meeting"])
