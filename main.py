@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 from models import Message, Meeting
 from database import insert_message, get_all_messages, insert_meeting, get_meetings
+from mailer import send_meeting_email
+
 
 app = FastAPI()
 
@@ -42,7 +44,13 @@ async def fetch_meetings():
 @app.post("/schedule")
 async def schedule_meeting(meeting: Meeting):
     insert_meeting(meeting.dict())
-    return {"status": "scheduled"}
+
+    # Prepare and send email
+    subject = f"📅 Meeting Scheduled: {meeting.title}"
+    body = f"Hello,\n\nYou have a meeting scheduled.\n\nTitle: {meeting.title}\nDate: {meeting.date}\nTime: {meeting.time}\n\nRegards,\nMeeting Scheduler App"
+    send_meeting_email(subject, body, meeting.participants)
+
+    return {"status": "scheduled and emailed"}
 
 
 @app.websocket("/ws/chat")
